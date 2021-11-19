@@ -1,0 +1,17 @@
+version: "3"
+services:
+  flask:
+    container_name: Flask_server
+    image: python:3.8
+    working_dir: /diplomova_praca_back-end
+    ports:
+      - 8080:8080
+    environment:
+      - WERKZEUG_DEBUG_PIN:off
+    volumes:
+      - C:\Users\newsm\PycharmProjects\Flask_Server_DP\diplomova_praca_back-end/:/diplomova_praca_back-end
+    command: bash -c "
+     export WERKZEUG_DEBUG_PIN=off
+     && pip install -r r.txt
+     && python Main.py
+     "
