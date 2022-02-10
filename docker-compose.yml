@@ -1,17 +1,30 @@
 version: "3"
 services:
-  flask:
-    container_name: Flask_server
-    image: python:3.8
-    working_dir: /diplomova_praca_back-end
+#  flask:
+#    container_name: Flask_server
+#    image: python:3.8
+#    working_dir: /diplomova_praca_back-end
+#    ports:
+#      - 8080:8080
+#    environment:
+#      - WERKZEUG_DEBUG_PIN:off
+#    volumes:
+#      - C:\Users\newsm\PycharmProjects\Flask_Server_DP\diplomova_praca_back-end/:/diplomova_praca_back-end
+#    command: bash -c "
+#     export WERKZEUG_DEBUG_PIN=off
+#     && pip install -r r.txt
+#     && python Main.py
+#     "
+
+  redis:
+    image: "redislabs/rejson:latest"
+
+    container_name: redis-redisjson
+    command: redis-server --requirepass admin --loadmodule /usr/lib/redis/modules/rejson.so --loadmodule /usr/lib/redis/modules/redisearch.so
+
     ports:
-      - 8080:8080
+      - "6379:6379"
+    tty: false
+
     environment:
-      - WERKZEUG_DEBUG_PIN:off
-    volumes:
-      - C:\Users\newsm\PycharmProjects\Flask_Server_DP\diplomova_praca_back-end/:/diplomova_praca_back-end
-    command: bash -c "
-     export WERKZEUG_DEBUG_PIN=off
-     && pip install -r r.txt
-     && python Main.py
-     "
+      - REDIS_REPLICATION_MODE=master
